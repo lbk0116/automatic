@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record model="workflow" id="wkf_automatic_order">
+            <field name="name">Automatic Order workflow</field>
+            <field name="osv">automatic.order</field>
+            <field name="on_create">True</field>
+        </record>
+
+        <record model="workflow.activity" id="automatic_order_new">
+            <field name="name">new</field>
+            <field name="wkf_id" ref="wkf_automatic_order" />
+            <field name="flow_start" eval="True"/>
+            <field name="kind">function</field>
+            <field name="action">action_new()</field>
+        </record>
+        <record model="workflow.activity" id="automatic_order_formatCheck">
+            <field name="name">format check</field>
+            <field name="wkf_id" ref="wkf_automatic_order" />
+            <field name="kind">function</field>
+            <field name="action">action_formatCheck()</field>
+        </record>
+        <record model="workflow.activity" id="automatic_order_ruleCheck">
+            <field name="name">rule check</field>
+            <field name="wkf_id" ref="wkf_automatic_order" />
+            <field name="kind">function</field>
+            <field name="action">action_ruleCheck()</field>
+        </record>
+        <record model="workflow.activity" id="automatic_order_scriptCheck">
+            <field name="name">script check</field>
+            <field name="wkf_id" ref="wkf_automatic_order" />
+            <field name="kind">function</field>
+            <field name="action">action_scriptCheck()</field>
+        </record>
+        <record model="workflow.activity" id="automatic_order_exec">
+            <field name="name">exec</field>
+            <field name="wkf_id" ref="wkf_automatic_order" />
+            <field name="kind">function</field>
+            <field name="action">action_exec()</field>
+        </record>
+        <record model="workflow.activity" id="automatic_order_verification">
+            <field name="name">verification</field>
+            <field name="wkf_id" ref="wkf_automatic_order" />
+            <field name="kind">function</field>
+            <field name="action">action_verification()</field>
+        </record>
+        <record model="workflow.activity" id="automatic_order_closed">
+            <field name="name">closed</field>
+            <field name="wkf_id" ref="wkf_automatic_order" />
+            <field name="flow_stop" eval="True"/>
+            <field name="kind">function</field>
+            <field name="action">action_closed()</field>
+        </record>
+
+
+        <record model="workflow.transition" id="automatic_order_new_to_formatCheck">
+            <field name="act_from" ref="automatic_order_new" />
+            <field name="act_to" ref="automatic_order_formatCheck"/>
+            <field name="signal">set_to_formatCheck</field>
+        </record>
+        <record model="workflow.transition" id="automatic_order_formatCheck_to_ruleCheck">
+            <field name="act_from" ref="automatic_order_formatCheck" />
+            <field name="act_to" ref="automatic_order_ruleCheck" />
+            <field name="signal">set_to_ruleCheck</field>
+        </record>
+        <record model="workflow.transition" id="automatic_order_ruleCheck_to_scriptCheck">
+            <field name="act_from" ref="automatic_order_ruleCheck" />
+            <field name="act_to" ref="automatic_order_scriptCheck" />
+            <field name="signal">set_to_scriptCheck</field>
+        </record>
+        <record model="workflow.transition" id="automatic_order_scriptCheck_to_exec">
+            <field name="act_from" ref="automatic_order_scriptCheck" />
+            <field name="act_to" ref="automatic_order_exec"/>
+            <field name="signal">set_to_exec</field>
+        </record>
+        <record model="workflow.transition" id="automatic_order_exec_to_verification">
+            <field name="act_from" ref="automatic_order_exec" />
+            <field name="act_to" ref="automatic_order_verification"/>
+            <field name="signal">set_to_verification</field>
+        </record>
+        <record model="workflow.transition" id="automatic_order_verification_to_closed">
+            <field name="act_from" ref="automatic_order_verification" />
+            <field name="act_to" ref="automatic_order_closed" />
+            <field name="signal">set_to_closed</field>
+        </record>
+
+
+        <record model="workflow.transition" id="automatic_order_formatCheck_back_new">
+            <field name="act_from" ref="automatic_order_formatCheck" />
+            <field name="act_to" ref="automatic_order_new"/>
+            <field name="signal">back_new</field>
+        </record>
+        <record model="workflow.transition" id="automatic_order_ruleCheck_to_formatCheck">
+            <field name="act_from" ref="automatic_order_ruleCheck" />
+            <field name="act_to" ref="automatic_order_formatCheck" />
+            <field name="signal">back_formatCheck</field>
+        </record>
+        <record model="workflow.transition" id="automatic_order_scriptCheck_to_ruleCheck">
+            <field name="act_from" ref="automatic_order_scriptCheck" />
+            <field name="act_to" ref="automatic_order_ruleCheck" />
+            <field name="signal">back_ruleCheck</field>
+        </record>
+        <record model="workflow.transition" id="automatic_order_exec_to_scriptCheck">
+            <field name="act_from" ref="automatic_order_exec" />
+            <field name="act_to" ref="automatic_order_scriptCheck"/>
+            <field name="signal">back_scriptCheck</field>
+        </record>
+        <record model="workflow.transition" id="automatic_order_verification_to_exec">
+            <field name="act_from" ref="automatic_order_verification" />
+            <field name="act_to" ref="automatic_order_exec"/>
+            <field name="signal">back_exec</field>
+        </record>
+        <record model="workflow.transition" id="automatic_order_closed_to_verification">
+            <field name="act_from" ref="automatic_order_closed" />
+            <field name="act_to" ref="automatic_order_verification"/>
+            <field name="signal">back_verification</field>
+        </record>
+
+        <record model="workflow.transition" id="automatic_order_verification_to_closed">
+            <field name="act_from" ref="automatic_order_verification" />
+            <field name="act_to" ref="automatic_order_closed" />
+            <field name="signal">set_to_closed</field>
+        </record>
+        <!--
+        <record model="workflow.transition" id="automatic_order_ruleCheck_to_closed">
+            <field name="act_from" ref="automatic_order_ruleCheck" />
+            <field name="act_to" ref="automatic_order_closed" />
+            <field name="signal">set_to_closed</field>
+        </record>
+        <record model="workflow.transition" id="automatic_order_scriptCheck_to_closed">
+            <field name="act_from" ref="automatic_order_scriptCheck" />
+            <field name="act_to" ref="automatic_order_closed" />
+            <field name="signal">set_to_closed</field>
+        </record>
+        <record model="workflow.transition" id="automatic_order_exec_to_closed">
+            <field name="act_from" ref="automatic_order_exec" />
+            <field name="act_to" ref="automatic_order_closed" />
+            <field name="signal">set_to_closed</field>
+        </record>
+        -->
+    </data>
+</openerp>

@@ -1,0 +1,14 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+automatic_order_all,automatic_order all,model_automatic_order,,1,1,1,1
+automatic_order_line_all,automatic_order_line all,model_automatic_order_line,,1,1,1,1
+automatic_network_all,automatic_network all,model_automatic_network,,1,1,1,1
+automatic_route_all,automatic_route all,model_automatic_route,,1,1,1,1
+automatic_interface_all,automatic_interface all,model_automatic_interface,,1,1,1,1
+automatic_server_all,automatic_server all,model_automatic_server,,1,1,1,1
+automatic_aclline_all,automatic_aclline all,model_automatic_aclline,,1,1,1,1
+automatic_aclresult_all,automatic_aclresult all,model_automatic_aclresult,,1,1,1,1
+automatic_conftxt_all,automatic_conftxt all,model_automatic_conftxt,,1,1,1,1
+automatic_device_all,automatic_device all,model_automatic_device,,1,1,1,1
+automatic_ci_all_all,automatic_ci_all all,model_automatic_ci_all,,1,1,1,1
+automatic_change_log_all,automatic_change_log all,model_automatic_change_log,,1,1,1,1
+automatic_find_acl_all,automatic_find_acl all,model_automatic_find_acl,,1,1,1,1

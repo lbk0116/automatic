@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.actions.act_window" id="automatic_device_list_action">
+            <field name="name">Device</field>
+            <field name="res_model">automatic.device</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create the first device
+                </p>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="automatic_route_list_action">
+            <field name="name">Route</field>
+            <field name="res_model">automatic.route</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create the first route
+                </p>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="automatic_interface_list_action">
+            <field name="name">Interface</field>
+            <field name="res_model">automatic.interface</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create the first interface
+                </p>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="automatic_order_list_action">
+            <field name="name">Order</field>
+            <field name="res_model">automatic.order</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create the first order
+                </p>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="automatic_script_list_action">
+            <field name="name">Script</field>
+            <field name="res_model">automatic.conftxt</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create the first script
+                </p>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="automatic_network_list_action">
+            <field name="name">network</field>
+            <field name="res_model">automatic.network</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create the first network
+                </p>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="automatic_server_list_action">
+            <field name="name">Server</field>
+            <field name="res_model">automatic.server</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="automatic_server_tree_view"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create the first script
+                </p>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="automatic_aclline_list_action">
+            <field name="name">Aclline</field>
+            <field name="res_model">automatic.aclline</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="automatic_aclline_tree_view"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create the first script
+                </p>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="automatic_aclresult_list_action">
+            <field name="name">Aclresult</field>
+            <field name="res_model">automatic.aclresult</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="automatic_aclresult_tree_view"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create the first script
+                </p>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="device_script_list_action">
+             <field name="name">device_script_list</field>
+             <field name="res_model">automatic.conftxt</field>
+             <field name="view_type">form</field>
+             <field name="view_mode">tree</field>
+             <field name="view_id" ref="automatic_device_script_tree_view"></field>
+             <field name="domain">[('order_line_id.order_id','=',active_id)]</field>
+             <field name="context">{"search_default_device":1}</field>
+        </record>
+        <record model="ir.actions.act_window" id="aclresult_list_action">
+            <field name="name">Aclresult_list</field>
+            <field name="res_model">automatic.aclresult</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="automatic_aclresult_tree_view"/>
+            <field name="domain">[('order_id','=',active_id)]</field>
+           <!-- <field name="context">{"search_default_line":1}</field> -->
+        </record>
+        <!-- top level menu: no parent -->
+        <menuitem id="main_automatic_menu" name="Automatic" string="自动化"/>
+        <!-- A first level in the left side menu is needed before using action= attribute -->
+        <menuitem id="resource_manage_menu" name="resource manage" parent="main_automatic_menu" />
+        <menuitem id="order_manage_menu" name="Order manage" parent="main_automatic_menu" />
+        <menuitem id="script_manage_menu" name="Scripe manage" parent="main_automatic_menu" />
+        <!-- A second level in the left side menu is needed before using action= attribute -->
+        <menuitem id="device_list_menu" name="Device List"  parent="resource_manage_menu" action="automatic_device_list_action"/>
+        <menuitem id="route_list_menu" name="Route List" parent="resource_manage_menu" action="automatic_route_list_action" />
+        <menuitem id="interface_list_menu" name="Interface List" parent="resource_manage_menu" action="automatic_interface_list_action" />
+        <menuitem id="order_list_menu" name="Order List" parent="order_manage_menu" action="automatic_order_list_action" />
+        <menuitem id="pending_order_menu" name="Pending Order" parent="order_manage_menu" action="automatic_order_list_action" />
+        <menuitem id="processed_order_menu" name="Processed Order" parent="order_manage_menu" action="automatic_order_list_action" />
+        <menuitem id="script_list_menu" name="Script List" parent="script_manage_menu" action="automatic_script_list_action" />
+        <menuitem id="network_list_menu" name="network List" parent="resource_manage_menu" action="automatic_network_list_action"/>
+        <menuitem id="server_list_menu" name="Server List" parent="resource_manage_menu" action="automatic_server_list_action" />
+        <menuitem id="aclline_list_menu" name="aclline List" parent="resource_manage_menu" action="automatic_aclline_list_action" />
+        <menuitem id="aclresult_list_menu" name="AclResult List" parent="script_manage_menu" action="automatic_aclresult_list_action" />
+    </data>
+</openerp>
