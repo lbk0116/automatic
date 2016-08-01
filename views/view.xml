@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="automatic_order_form_view">
+            <field name="name">automatic_order.form</field>
+            <field name="model">automatic.order</field>
+            <field name="arch" type="xml">
+                <form string="Order Form">
+                    <header>
+                        <button name="set_to_formatCheck" type="workflow" string="同意" states="new" class="oe_highlight" />
+                        <button name="set_to_ruleCheck" type="workflow" string="同意" states="Format Check" class="oe_highlight" />
+                        <button name="set_to_scriptCheck" type="workflow" string="同意" states="Rule Check" class="oe_highlight" />
+                        <button name="set_to_exec" type="workflow" string="同意" states="Script Check" class="oe_highlight" />
+                        <button name="set_to_verification" type="workflow" string="同意" states="Exec" class="oe_highlight" />
+                        <button name="set_to_closed" type="workflow" string="关闭" states="Verification" />
+                        <button name="back_new" type="workflow" string="返回上一步" states="Format Check"  />
+                        <button name="back_formatCheck" type="workflow" string="返回上一步" states="Rule Check"  />
+                        <button name="back_ruleCheck" type="workflow" string="返回上一步" states="Script Check" />
+                        <button name="back_scriptCheck" type="workflow" string="返回上一步" states="Exec" />
+                        <button name="back_exec" type="workflow" string="返回上一步" states="Verification" />
+                        <button name="back_verification" type="workflow" string="返回上一步" states="Closed" />
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                         <div class="oe_right oe_button_box" name="button_box">
+                        <button name="91" type="action" string="查看脚本" attrs="{'invisible':['|','|',('state','=','new'),('state','=','Format Check'),('state','=','Rule Check')]}"/>
+                        <button name="93" type="action" string="检查结果" attrs="{'invisible':['|',('state','=','new'),('state','=','Format Check')]}"/>   
+                         </div>
+                        <group>
+                            <field name="order_id" string="需求单号" />
+                            <group>
+						        <field name='data'/>
+					        </group>
+					        <group>
+						        <button name='import_order_line' string='Import' type='object' class='oe_edit_only' states="new" />
+                            </group>
+                            <!--<field name="order_no" string="需求单行号" />-->
+                            <!--<field name="isok" string="格式是否正常" readonly="True" />-->
+                            <!--<field name="compliance" string="合规检查" readonly="True" />-->
+                            <!--<field name="result" string="结果" readonly="True" />-->
+                        </group>
+                        <group>
+                            <div>
+                            <label for="line_ids" string="需求行" />
+                            <field name="line_ids" />
+
+                            </div>
+                        </group>
+                        <!--<group>-->
+                            <!--<field name="protocol" string="协议" />-->
+                            <!--<field name="sourse_str" string="源地址" />-->
+                            <!--<field name="dst_str" string="目的地址" />-->
+                            <!--<field name="server_str" string="服务" />-->
+                        <!--</group>-->
+                        <notebook>
+                            <page string="错误日志">
+                                <field name="err_log" />
+                            </page>
+                            <page string="优化日志">
+                                <field name="format_log" />
+                            </page>
+                            <page string="检查日志">
+                                <field name="compliance_log"/>
+                            </page>
+                            <!--<page string="生成脚步">-->
+                                <!--<field name="script_id" />-->
+                            <!--</page>-->
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="automatic_order_tree_view">
+            <field name="name">automatic_order.tree</field>
+            <field name="model">automatic.order</field>
+                <field name="arch" type="xml">
+                    <tree string="Order tree">
+                        <field name="order_id" string="需求单号" />
+                        <!--<field name="sourse_str" string="源地址" />-->
+                        <!--<field name="dst_str" string="目的地址" />-->
+                        <!--<field name="protocol" string="协议" />-->
+                        <!--<field name="server_str" string="服务" />-->
+                        <field name="state" string="状态" />
+                        <field name="result" string="结果" />
+                    </tree>
+                </field>
+        </record>
+        <record model="ir.ui.view" id="automatic_order_line_form_view">
+            <field name="name">automatic_order_line.form</field>
+            <field name="model">automatic.order_line</field>
+            <field name="arch" type="xml">
+                <form string="Order Form">
+                    <group>
+                       <group>
+                            <field name="sourse_str" string="源地址" />
+                            <field name="protocol" string="协议" />
+                            <field name="isok" string="格式" readonly="True"/>
+                            <field name="line_no" string="行号" />
+                       </group>
+                        <group>
+                            <field name="dst_str" string="目的地址" />
+                            <field name="server_str" string="服务" />
+                            <field name="compliance" string="合规" readonly="True"/>
+                         </group>
+                     </group>
+                     <!--
+                    <group>
+                        <div>
+                            <label for="device_ids"  />
+                            <field name="device_ids" >
+                                <tree editable="top">
+                                        <field name="name" string = "名称"/>
+                                        <field name="ip" string="设备管理地址" />
+                                </tree>
+                            </field>
+                        </div>
+                    </group>
+                    -->
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="automatic_order_line_tree_view">
+            <field name="name">automatic_order_line.tree</field>
+            <field name="model">automatic.order_line</field>
+                <field name="arch" type="xml">
+                    <tree string="Order tree" >
+                        <field name="line_no" string="行号" />
+                        <field name="sourse_str" string="源地址" />
+                        <field name="dst_str" string="目的地址" />
+                        <field name="protocol" string="协议" />
+                        <field name="server_str" string="服务" />
+                        <field name="isok" string="格式" readonly="True"/>
+                        <field name="compliance" string="合规" readonly="True"/>
+                       <!-- <button name="button_event" type="object" string="查看脚本" />-->
+                    </tree>
+                </field>
+        </record>
+
+        <record model="ir.ui.view" id="automatic_network_form_view">
+            <field name="name">automatic_network.form</field>
+            <field name="model">automatic.network</field>
+            <field name="arch" type="xml">
+                <form string="network Form">
+                    <sheet>
+                        <group>
+                            <field name="fw_ip" string="防火墙地址" />
+                            <field name="net_name" string="地址组名称" />
+                            <field name="obj_items" string="地址组列表" />
+                            <field name="device_id" string="关联的设备" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="automatic_network_tree_view">
+            <field name="name">automatic_network.tree</field>
+            <field name="model">automatic.network</field>
+            <field name="arch" type="xml">
+                <tree string="network tree">
+                            <field name="fw_ip" string="防火墙地址" />
+                            <field name="net_name" string="地址组名称" />
+                            <field name="obj_items" string="地址组列表" />
+                            <field name="device_id" string="关联的设备" />
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="automatic_route_form_view">
+            <field name="name">automatic_route.form</field>
+            <field name="model">automatic.route</field>
+            <field name="arch" type="xml">
+                <form string="route Form">
+                    <header>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="src" string="源地址" />
+                            <field name="dst" string="目的地址" />
+                            <field name="mask" string="子网掩码" />
+                            <field name="interface" string="路由接口" />
+                            <field name="nexthop" string="路由下一跳" />
+                            <field name="device_id" string="关联的设备" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="automatic_route_tree_view">
+            <field name="name">automatic_route.tree</field>
+            <field name="model">automatic.route</field>
+            <field name="arch" type="xml">
+                <tree string="route tree">
+                            <field name="src" string="源地址" />
+                            <field name="dst" string="目的地址" />
+                            <field name="mask" string="子网掩码" />
+                            <field name="interface" string="路由接口" />
+                            <field name="nexthop" string="路由下一跳" />
+                            <field name="device_id" string="关联的设备" />
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="automatic_interface_form_view">
+            <field name="name">automatic.interface.form</field>
+            <field name="model">automatic.interface</field>
+            <field name="arch" type="xml">
+                <form string="interface Form">
+                    <sheet>
+                        <group>
+                            <field name="name" string="源地址" />
+                            <field name="ip" string="目的地址" />
+                            <field name="mask" string="子网掩码" />
+                            <field name="device_id" string="关联的设备" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="automatic_interface_tree_view">
+            <field name="name">automatic_interface.tree</field>
+            <field name="model">automatic.interface</field>
+            <field name="arch" type="xml">
+                <tree string="interface tree">
+                            <field name="name" string="源地址" />
+                            <field name="ip" string="目的地址" />
+                            <field name="mask" string="子网掩码" />
+                            <field name="device_id" string="关联的设备" />
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="automatic_conftxt_form_view">
+            <field name="name">automatic_conftxt.form</field>
+            <field name="model">automatic.conftxt</field>
+            <field name="arch" type="xml">
+                <form string="conftxt Form">
+
+                    <sheet>
+                        <group>
+
+                            <field name="order_line_id" string="需求行号" />
+                            <field name="device_id" string="设备" />
+                            <field name="state" string="配置状态" />
+                            <field name="fw_ip" string="防火墙" />
+                            <field name="date_modified" string="更新时间" />
+                        </group>
+                        <notebook>
+                            <page string="具体配置">
+                                <field name="conf_txt" />
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="automatic_conftxt_tree_view">
+            <field name="name">automatic_conftxt.tree</field>
+            <field name="model">automatic.conftxt</field>
+            <field name="arch" type="xml">
+                <tree string="conftxt Tree" >
+                    <!--
+                    <field name="order_id" string="需求单号" />
+                    -->
+                    <field name="device_id" string="设备" />
+                    <!--<field name="order_line_id" string="需求单行号" />-->
+                    <field name="state" string="配置状态" />
+                    <!--<field name="fw_ip" string="防火墙" />-->
+                    <!--<field name="date_modified" string="更新时间" />-->
+                    <field name="conf_txt" string="具体配置" />
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="automatic_device_form_view">
+            <field name="name">automatic_device.form</field>
+            <field name="model">automatic.device</field>
+            <field name="arch" type="xml">
+                <form string="device Form">
+                    <sheet>
+                    <header>
+                        <button name="updata_date" type="object" string="ceshi"  class="oe_highlight" />
+                    </header>
+                        <group>
+                            <field name="name" string="设备名称" />
+                            <field name="ip" string="设备管理地址" />
+                            <field name="username" string="登录用户名" />
+                            <field name="password" string="密码" />
+                            <field name="date_modified" string="更新时间" />
+                        </group>
+                        <notebook>
+                            <page string="防火墙策略列表">
+                                <field name="acl_items"  />
+                            </page>
+                            <page string="路由组对象列表">
+                                <field name="route_ids"  />
+                            </page>
+                            <page string="接口组对象列表">
+                                <field name="int_ids" />
+                            </page>
+                            <page string="地址组对象列表">
+                                <field name="network_items"  />
+                            </page>
+                            <page string="端口组对象列表">
+                                <field name="server_items" />
+                            </page>
+                            <page string="脚本列表">
+                                <field name="conftxt_ids" />
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="automatic_device_tree_view">
+            <field name="name">automatic_device.tree</field>
+            <field name="model">automatic.device</field>
+            <field name="arch" type="xml">
+                <tree string="device tree">
+                    <field name="name" string="设备名称" />
+                    <field name="ip" string="设备管理地址" />
+                    <field name="acl_items" string="策略行" />
+                    <field name="date_modified" string="更新时间" />
+                    <field name="connected" string="连通性" />
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="automatic_server_form_view">
+            <field name="name">automatic_server.form</field>
+            <field name="model">automatic.server</field>
+            <field name="arch" type="xml">
+                <form string="server Form">
+                    <sheet>
+                        <group>
+                            <field name="fw_ip" string="防火墙地址" />
+                            <field name="ser_name" string="策略组名称" />
+                            <field name="obj_items" string="端口组列表" />
+                            <field name="device_id" string="关联的设备" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="automatic_server_tree_view">
+            <field name="name">automatic_server.tree</field>
+            <field name="model">automatic.server</field>
+            <field name="arch" type="xml">
+                <tree string="server Tree">
+                    <field name="fw_ip" string="防火墙地址" />
+                    <field name="ser_name" string="策略组名称" />
+                    <field name="obj_items" string="端口组列表" />
+                    <field name="device_id" string="关联的设备" />
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="automatic_aclline_form_view">
+            <field name="name">automatic_aclline.form</field>
+            <field name="model">automatic.aclline</field>
+            <field name="arch" type="xml">
+                <form string="aclline Form">
+                    <header>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="fw_ip" string="防火墙地址" />
+                            <field name="acl_name" string="防火墙策略名称" />
+                            <field name="acl_permit" string="策略" />
+                            <field name="acl_no" string="策略行号" />
+                            <field name="protocol" string="协议名称" />
+                            <field name="raw_data" string="策略原始配置" />
+                            <field name="sourse_obj" string="源地址组" />
+                            <field name="dst_obj" string="目的地址组" />
+                            <field name="server_obj" string="服务端口组" />
+                            <field name="device_id" string="关联设备" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="automatic_aclline_tree_view">
+            <field name="name">automatic_aclline.tree</field>
+            <field name="model">automatic.aclline</field>
+            <field name="arch" type="xml">
+
+                <tree string="aclline Tree">
+                    <field name="fw_ip" string="防火墙地址" />
+                    <field name="acl_name" string="防火墙策略名称" />
+                    <field name="acl_permit" string="策略" />
+                    <field name="protocol" string="协议名称" />
+                    <field name="sourse_obj1" string="源地址组" />
+                    <field name="dst_obj1" string="目的地址组" />
+                    <field name="server_obj1" string="服务端口组" />
+                    <field name="device_id" string="关联设备" />
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="automatic_aclresult_form_view">
+            <field name="name">automatic_aclresult.form</field>
+            <field name="model">automatic.aclresult</field>
+            <field name="arch" type="xml">
+                <form string="aclresult Form">
+                    <header>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="order_id" string="需求单号" />
+                            <field name="order_line_id" string="需求单具体行号" />
+                            <field name="fw_ip" string="防火墙地址" />
+                            <field name="acl_name" string="防火墙策略名称" />
+                            <field name="isfind" string="匹配策略" />
+                            <field name="deny_no" string="deny的策略行号" />
+                            <field name="protocol" string="协议名称" />
+                            <field name="sourse_obj" string="查询的源地址组" />
+                            <field name="dst_obj" string="查询的目的地址组" />
+                            <field name="server_obj" string="查询的端口组" />
+                            <field name="rest_sourse" string="未放开的源地址组" />
+                            <field name="same_sourse_name" string="已放开的源地址组名称" />
+                            <field name="same_dst_name" string="已放开的目的地址组名称" />
+                            <field name="same_server_name" string="已放开的端口组名称" />
+                            <field name="find_acl" string="查询结果" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="automatic_aclresult_tree_view">
+            <field name="name">automatic_aclresult.tree</field>
+            <field name="model">automatic.aclresult</field>
+            <field name="arch" type="xml">
+                <tree string="aclresult Tree">
+                    <field name="order_id" string="需求单号" />
+                    <field name="order_line_id" string="需求单具体行号" />
+                    <field name="fw_ip" string="防火墙地址" />
+                    <field name="acl_name" string="防火墙策略名称" />
+                    <field name="find_acl" string="查询结果" />
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="automatic_device_script_tree_view">
+            <field name="name">automatic_script_device.tree</field>
+            <field name="model">automatic.conftxt</field>
+            <field name="arch" type="xml">
+                <tree string="script tree">
+                    <field name="conf_txt" string="脚本"></field>
+                    <field name="fw_ip" string="IP"></field>
+                </tree>
+            </field>
+        </record>
+        <record id="script_filter" model="ir.ui.view">
+            <field name="name">script.select</field>
+            <field name="model">automatic.conftxt</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <group expand="0" string="group_by">
+                        <filter string="device_id" name="device" context="{'group_by':'device_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <record id="aclresult_filter" model="ir.ui.view">
+            <field name="name">aclresult.select</field>
+            <field name="model">automatic.aclresult</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <group expand="0" string="group_by">
+                        <filter string="订单行号" name="line" context="{'group_by':'order_line_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+    </data>
+</openerp>
