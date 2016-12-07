@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * change_automatic
+# * automatic
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2014
@@ -20,78 +20,78 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 
-#. module: change_automatic
-#: model:ir.ui.menu,name:change_automatic.main_automatic_menu
+#. module: automatic
+#: model:ir.ui.menu,name:automatic.main_automatic_menu
 msgid "Automatic"
 msgstr "自动化"
 
-#. module: change_automatic
-#: model:ir.ui.menu,name:change_automatic.resource_manage_menu
+#. module: automatic
+#: model:ir.ui.menu,name:automatic.resource_manage_menu
 msgid "resource manage"
 msgstr "资源管理"
 
-#. module: change_automatic
-#: model:ir.ui.menu,name:change_automatic.order_manage_menu
+#. module: automatic
+#: model:ir.ui.menu,name:automatic.order_manage_menu
 msgid "Order manage"
 msgstr "工单管理"
 
-#. module: change_automatic
-#: model:ir.ui.menu,name:change_automatic.script_manage_menu
+#. module: automatic
+#: model:ir.ui.menu,name:automatic.script_manage_menu
 msgid "Scripe manage"
 msgstr "脚本管理"
 
-#. module: change_automatic
-#: model:ir.ui.menu,name:change_automatic.device_list_menu
+#. module: automatic
+#: model:ir.ui.menu,name:automatic.device_list_menu
 msgid "Device List"
 msgstr "设备列表"
 
-#. module: change_automatic
-#: model:ir.ui.menu,name:change_automatic.route_list_menu
+#. module: automatic
+#: model:ir.ui.menu,name:automatic.route_list_menu
 msgid "Route List"
 msgstr "路由列表"
 
-#. module: change_automatic
-#: model:ir.ui.menu,name:change_automatic.interface_list_menu
+#. module: automatic
+#: model:ir.ui.menu,name:automatic.interface_list_menu
 msgid "Interface List"
 msgstr "设备接口列表"
 
-#. module: change_automatic
-#: model:ir.ui.menu,name:change_automatic.order_list_menu
+#. module: automatic
+#: model:ir.ui.menu,name:automatic.order_list_menu
 msgid "Order List"
 msgstr "工单列表"
 
-#. module: change_automatic
-#: model:ir.ui.menu,name:change_automatic.pending_order_menu
+#. module: automatic
+#: model:ir.ui.menu,name:automatic.pending_order_menu
 msgid "Pending Order"
 msgstr "待处理工单"
 
-#. module: change_automatic
-#: model:ir.ui.menu,name:change_automatic.processed_order_menu
+#. module: automatic
+#: model:ir.ui.menu,name:automatic.processed_order_menu
 msgid "Processed Order"
 msgstr "已处理工单"
 
-#. module: change_automatic
-#: model:ir.ui.menu,name:change_automatic.script_list_menu
+#. module: automatic
+#: model:ir.ui.menu,name:automatic.script_list_menu
 msgid "Script List"
 msgstr "脚本列表"
 
-#. module: change_automatic
-#: model:ir.ui.menu,name:change_automatic.network_list_menu
+#. module: automatic
+#: model:ir.ui.menu,name:automatic.network_list_menu
 msgid "network List"
 msgstr "地址组列表"
 
-#. module: change_automatic
-#: model:ir.ui.menu,name:change_automatic.server_list_menu
+#. module: automatic
+#: model:ir.ui.menu,name:automatic.server_list_menu
 msgid "Server List"
 msgstr "端口列表"
 
-#. module: change_automatic
-#: model:ir.ui.menu,name:change_automatic.aclline_list_menu
+#. module: automatic
+#: model:ir.ui.menu,name:automatic.aclline_list_menu
 msgid "aclline List"
 msgstr "设备ACL"
 
-#. module: change_automatic
-#: model:ir.ui.menu,name:change_automatic.aclresult_list_menu
+#. module: automatic
+#: model:ir.ui.menu,name:automatic.aclresult_list_menu
 msgid "AclResult List"
 msgstr "ACL查询结果"
 

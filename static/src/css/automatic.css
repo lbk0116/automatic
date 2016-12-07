@@ -1,0 +1,6 @@
+@media (min-width: 768px) {
+  .oe_list_buttons button.importExcel {
+    margin-left: 120px;
+    width: 120px;
+  }
+}

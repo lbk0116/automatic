@@ -31,10 +31,12 @@ Change Automatic module that covers:
     'data': [
         'views/view.xml',
         'views/menu.xml',
+        'views/automatic_link.xml',
         'data/order_workflow.xml',
         'security/ir.model.access.csv',
     ],
     'qweb' : [
+        'static/xml/automatic.xml'
     ],
     'demo': [
     ],
