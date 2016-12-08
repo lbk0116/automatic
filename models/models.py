@@ -68,6 +68,10 @@ class Order(models.Model):
         ('ongoing' , u'进行中') ,
     ] , default='ongoing' , string="结果")
     data = fields.Binary('lines')
+    deparment = fields.Char("部门")
+    proposer = fields.Char("申请人")
+    phone = fields.Char("联系电话")
+
     # api for 中行程序
     cj = cookielib.CookieJar()
     cookie_support = urllib2.HTTPCookieProcessor(cj)
@@ -310,7 +314,7 @@ class Order(models.Model):
 
         print type(self)
         wiz=self.browse(self.id)
-        print wiz
+        print base64.decodestring(wiz.data)
         if not wiz.data:
             raise exceptions.ValidationError('请选择要导入的文件')
         r = Read_Excel(file_contents=base64.decodestring(wiz.data))
@@ -330,6 +334,7 @@ class Order_line(models.Model):
     _rec_name = 'line_no'
 
     line_no = fields.Integer()  # 工单具体行号
+    line_info = fields.Text() # 工单行需求
     isok = fields.Boolean(default=True)  # 需求表检查是否正常
     compliance = fields.Boolean(default=True)  # 需求表合规效验是否正常
     protocol = fields.Text()  # 协议名称（ip/tcp/udp）三类

@@ -14,7 +14,7 @@ class Read_Excel:
                 校验:不能有重复的项,不能有空项
     '''
 
-    def __init__(self, file_contents=None, file_name=None, col_n=1, del_n=0, by_index=0, ):
+    def __init__(self, file_contents=None, file_name=None, col_n=3, del_n=0, by_index=0, ):
         self.file_name = file_name
         self.file_contents = file_contents
         self.col_n = col_n
