@@ -2,7 +2,7 @@
 <templates>
     <t t-name="importExcel">
         <div class="importExcel">
-            <form class="form-horizontal" action="/import_order" enctype="multipart/form-data" method="post">
+            <form class="form-horizontal" enctype="multipart/form-data">
                 <div class="form-group">
                     <input type="file" name="excel" id="exampleInputFile" accept="application/vnd.ms-excel" />
                     <p class="help-block">请选择Excel类型文件导入</p>

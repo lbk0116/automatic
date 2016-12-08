@@ -38,10 +38,22 @@ openerp.automatic=function(instance){
         },
         popBox:function(){
             var $form = $(QWeb.render("importExcel", {}));
+            $form.find("form").ajaxForm({
+                url:"/import_order",
+                type:"POST",
+                success:function(txt){
+                    if(txt=="导入成功"){
+                        $dialog.close();
+                        $("ul.oe_secondary_submenu>li.active>a").trigger("click");
+                    }else{
+                        window.alert(txt);
+                    }
+                }
+            });
             var $dialog=new instance.web.Dialog(null,{
-                size: 'medium',
+                size: 'small',
                 dialogClass: 'oe_act_window',
-                title: _t("导入Excel数据")
+                title: _t("导入Excel工单数据")
             },$form).open();
         }
     });

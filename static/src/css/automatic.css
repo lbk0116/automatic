@@ -4,3 +4,9 @@
     width: 120px;
   }
 }
+.modal-content .importExcel form {
+  padding: 10px;
+}
+.modal-content .importExcel form div.form-group {
+  margin: 0px;
+}
