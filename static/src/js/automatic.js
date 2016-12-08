@@ -21,7 +21,7 @@ openerp.automatic=function(instance){
         addBtn:function(){
             var me=this;
             var timer=setInterval(function(){
-                if($(me.activeMenu).length){
+                if($(me.activeMenu).length&&$('.oe_list_buttons').length){
                     clearInterval(timer);
                     if($(me.activeMenu).html().trim()=="工单列表"){
                         a();
