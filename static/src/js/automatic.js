@@ -9,14 +9,11 @@ openerp.automatic=function(instance){
 
     instance.automatic.Widget=instance.web.Widget.extend({
         activeMenu:"",
-        init:function(){
+        init:function(p){
             this.activeMenu=".oe_secondary_menus_container li.active>a>span";
         },
-        start:function(o){
-            var displayName=o.client.action_manager.inner_action.display_name;
-            if(displayName=="Order"||displayName=="工单"){
-                this.addBtn();
-            }
+        start:function(){
+            this.addBtn();
         },
         addBtn:function(){
             var me=this;
@@ -57,6 +54,15 @@ openerp.automatic=function(instance){
             },$form).open();
         }
     });
-    //当视图加载时调用自己指定代码
-    instance.web.actionList.push(new instance.automatic.Widget());
+
+    instance.web.View.include({
+        start:function(){
+            var self = this;
+            if(this.model == "automatic.order"){
+                var automatic = new instance.automatic.Widget(self);
+                automatic.start();
+            }
+            return this._super.apply(this, arguments);
+        }
+    });
 }
